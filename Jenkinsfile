@@ -40,8 +40,9 @@ pipeline{
            stage('MetricCheck'){
                agent any
               steps{
-		      sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+		      
 		     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+			sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
                      sh 'exit 1' 
                 }   
                  
