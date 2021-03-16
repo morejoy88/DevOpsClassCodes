@@ -38,9 +38,9 @@ pipeline{
            }	
           }
            stage('MetricCheck'){
-               agent any
+               agent node1
               steps{
-		      
+		     git 'https://github.com/morejoy88/DevOpsClassCodes.git'
 		     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 			sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
                       
