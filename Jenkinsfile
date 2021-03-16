@@ -38,7 +38,7 @@ pipeline{
            }	
           }
            stage('MetricCheck'){
-               agent node1
+               agent {label 'node1'}
               steps{
 		     
 		     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
