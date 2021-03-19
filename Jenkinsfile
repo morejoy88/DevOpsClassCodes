@@ -66,7 +66,7 @@ pipeline{
 		      sh label: '', script: '''rm -rf jenkindockerfile
 		      mkdir jenkindockerfile
 		      cd jenkindockerfile
-		      cp /var/lib/jenkins/workspace/package/target/addressbook.war .
+		      cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
 		      touch dockerfile
 		      cat <<EOT>> dockerfile
 			FROM tomcat
