@@ -59,6 +59,25 @@ pipeline{
                   sh 'mvn package'
               }
           }
+	  
+	  stage('deploy'){
+              agent any
+              steps{
+		      sh label: '', script: '''rm -rf jenkindockerfile
+		      mkdir jenkindockerfile
+		      cd jenkindockerfile
+		      cp /var/lib/jenkins/workspace/package/target/addressbook.war .
+		      touch dockerfile
+		      cat <<EOT>> dockerfile
+			FROM tomcat
+			ADD addressbook.war /usr/local/tomcat/webapps
+			EXPOSE 8888
+			CMD ["catalina.sh", "run"]
+			EOT
+		      sudo docker build -t myaddrbook:$BUILD_NUMBER .
+		      sudo docker run -d -P myaddrbook:$BUILD_NUMBER
+              }
+          }
           
       }
 }
