@@ -63,7 +63,7 @@ pipeline{
 	  stage('deploy'){
               agent any
               steps{
-		      sh label: '', script: '''rm -rf jenkindockerfile
+		      sh label: 'My Pipeline Test', script: '''rm -rf jenkindockerfile
 		      mkdir jenkindockerfile
 		      cd jenkindockerfile
 		      cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
@@ -75,7 +75,7 @@ pipeline{
 			CMD ["catalina.sh", "run"]
 			EOT
 		      sudo docker build -t myaddrbook:$BUILD_NUMBER .
-		      sudo docker run -d -P myaddrbook:$BUILD_NUMBER
+		      sudo docker run -d -P myaddrbook:$BUILD_NUMBER'''
               }
           }
           
