@@ -67,8 +67,8 @@ pipeline{
 		      mkdir jenkindockerfile
 		      cd jenkindockerfile
 		      cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
-		      //touch dockerfile
-		      cat <<EOT touch dockerfile
+		      sh touch dockerfile
+		      cat <<EOT>> dockerfile
 			FROM tomcat
 			ADD addressbook.war /usr/local/tomcat/webapps
 			EXPOSE 8888
