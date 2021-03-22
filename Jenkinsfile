@@ -60,24 +60,28 @@ pipeline{
               }
           }
 	  
-	  stage('deploy'){
-              agent any
-              steps{
-		      sh label: 'My Pipeline Test', script: rm -rf jenkindockerfile
-		      mkdir jenkindockerfile
-		      cd jenkindockerfile
-		      cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
-		      sh touch dockerfile
-		      cat <<EOT>> dockerfile
-			FROM tomcat
-			ADD addressbook.war /usr/local/tomcat/webapps
-			EXPOSE 8888
-			CMD ["catalina.sh", "run"]
-			EOT
-		      sudo docker build -t myaddrbook:$BUILD_NUMBER .
-		      sudo docker run -d -P myaddrbook:$BUILD_NUMBER
-              }
-          }
+	
+	      
+	      
+		stage('Deploy'){
+		      agent any
+		      steps{
+			sh label: '', script: '''rm -rf mydockerfile
+		mkdir mydockerfile
+		cd mydockerfile
+		cp /var/lib/jenkins/workspace/Ppipeline1/target/addressbook.war .
+		touch dockerfile
+		cat <<EOT>> dockerfile
+		From tomcat
+		ADD addressbook.war /usr/local/tomcat/webapps
+		EXPOSE 8080
+		CMD ["catalina.sh", "run"]
+		EOT
+		sudo docker build -t myimage:$BUILD_NUMBER .
+		sudo docker run -itd -P myimage:$BUILD_NUMBER'''
+		      }
+		    }
+
           
       }
 }
