@@ -66,9 +66,9 @@ pipeline{
 		stage('Deploy'){
 		      agent any
 		      steps{
-			sh label: '', script: rm -rf mydockerfile
+			sh label: '', script: '''rm -rf mydockerfile
 		mkdir mydockerfile
-		cd mydockerfile
+		cd mydockerfile'''
 		
 		
 		      }
