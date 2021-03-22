@@ -62,8 +62,11 @@ pipeline{
 		stage('Deploy'){
 		      agent any
 		      steps{
-			sh 'rm -rf mydockerfile'
-		mkdir mydockerfile
+			      withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {  
+			     	 sh 'rm -rf mydockerfile'
+				sh 'mkdir mydockerfile'
+			      }
+			
 		
 		
 	      }
