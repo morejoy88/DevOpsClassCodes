@@ -66,7 +66,7 @@ pipeline{
 		stage('Deploy'){
 		      agent any
 		      steps{
-			sh label: '', script: '''rm -rf mydockerfile
+			sh label: '', script: rm -rf mydockerfile
 		mkdir mydockerfile
 		cd mydockerfile
 		cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
@@ -78,7 +78,7 @@ pipeline{
 		CMD ["catalina.sh", "run"]
 		EOT
 		sudo docker build -t myimage:$BUILD_NUMBER .
-		sudo docker run -itd -P myimage:$BUILD_NUMBER'''
+		sudo docker run -itd -P myimage:$BUILD_NUMBER
 		      }
 		    }
 
