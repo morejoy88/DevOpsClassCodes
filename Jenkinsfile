@@ -58,21 +58,16 @@ pipeline{
               steps{
                   sh 'mvn package'
               }
-          }
-	  
-	
-	      
-	      
+          }   
 		stage('Deploy'){
 		      agent any
 		      steps{
-			sh label: '', script: '''rm -rf mydockerfile
-		mkdir mydockerfile
-		cd mydockerfile'''
+			sh rm -rf mydockerfile
+		sh mkdir mydockerfile
 		
 		
-		      }
-		    }
+	      }
+	    }
 
           
       }
