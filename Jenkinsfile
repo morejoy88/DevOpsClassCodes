@@ -63,7 +63,7 @@ pipeline{
 		      agent any
 		      steps{
 			sh 'rm -rf mydockerfile'
-		sh 'mkdir mydockerfile'
+		sh mkdir mydockerfile
 		
 		
 	      }
