@@ -66,8 +66,8 @@ pipeline{
 			sh 'rm -rf mydockerfile'
 			sh 'mkdir mydockerfile'
 			
-			sh 'cd mydockerfile'
-			sh 'cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war . '
+		
+			sh 'cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war /var/lib/jenkins/workspace/pipeline1/mydockerfile'
 			sh 'touch dockerfile'
 			
 		
