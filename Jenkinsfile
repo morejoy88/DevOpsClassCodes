@@ -65,10 +65,16 @@ pipeline{
 			       
 			sh 'rm -rf mydockerfile'
 			sh 'mkdir mydockerfile'
-			
-		
 			sh 'cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war /var/lib/jenkins/workspace/pipeline1/mydockerfile'
-			sh 'touch dockerfile'
+			
+			sh 'touch 
+			cat <<EOT>> dockerfile
+				FROM tomcat
+				ADD addressbook.war /usr/local/tomcat/webapps
+				EXPOSE 8080
+				CMD ["catalina.sh", "run"]
+				EOT
+			      sh 'touch dockerfile'
 			
 		
 		
