@@ -72,7 +72,7 @@ pipeline{
 			FROM tomcat
 			ADD addressbook.war /usr/local/tomcat/webapps
 			EXPOSE 8080
-			CMD ["catalina.sh", "run"] > mydockerfile
+			CMD ["catalina.sh", "run"] >> mydockerfile
 			EOT
 			sudo docker build -t myimage:$BUILD_NUMBER .
 			sudo docker run -itd -P myimage:$BUILD_NUMBER'''
