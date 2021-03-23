@@ -74,7 +74,7 @@ pipeline{
 			EXPOSE 8080
 			CMD ["catalina.sh", "run"]'''		
 			sh 'sudo docker build -t myimage:$BUILD_NUMBER -f /var/lib/jenkins/workspace/pipeline1/mydockerfile/dockerfile .'
-			sh 'sudo docker run -itd -P myimage:$BUILD_NUMBER'
+			sh 'sudo docker run -itd -p 7000:8080 myimage:$BUILD_NUMBER'
 	      }
 	    }
 
