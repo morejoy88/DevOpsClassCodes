@@ -59,25 +59,23 @@ pipeline{
                   sh 'mvn package'
               }
           }   
-		stage('Deploy'){
-		      agent any
-		      steps{
-			       
-			sh 'rm -rf mydockerfile'
-			sh 'mkdir mydockerfile'
-			sh 'cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war /var/lib/jenkins/workspace/pipeline1/mydockerfile'
-			
-			sh 'touch 
+		
+	stage('Deploy'){
+	      agent any
+	      steps{
+			sh label: '', script:'''rm -rf mydockerfile
+			mkdir mydockerfile
+			cd mydockerfile
+			cp /var/lib/jenkins/workspace/pipeline1/target/addressbook.war .
+			touch dockerfile
 			cat <<EOT>> dockerfile
-				FROM tomcat
-				ADD addressbook.war /usr/local/tomcat/webapps
-				EXPOSE 8080
-				CMD ["catalina.sh", "run"]
-				EOT
-			      sh 'touch dockerfile'
-			
-		
-		
+			FROM tomcat
+			ADD addressbook.war /usr/local/tomcat/webapps
+			EXPOSE 8080
+			CMD ["catalina.sh", "run"]
+			EOT
+			sudo docker build -t myimage:$BUILD_NUMBER .
+			sudo docker run -itd -P myimage:$BUILD_NUMBER'''
 	      }
 	    }
 
