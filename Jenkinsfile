@@ -58,8 +58,8 @@ pipeline{
 			ADD addressbook.war /usr/local/tomcat/webapps
 			EXPOSE 8080
 			CMD ["catalina.sh", "run"]'''
-		      	sh 'docker rm -f myimage:$previousBuild'
-		      	sh 'docker rmi myimage:$previousBuild'
+		      	sh 'sudo docker rm -f myimage:$previousCompletedBuild'
+		      	sh 'sudo docker rmi myimage:$previousCompletedBuild'
 			sh 'sudo docker build -t myimage:$BUILD_NUMBER -f /var/lib/jenkins/workspace/pipeline1/mydockerfile/dockerfile .'
 			sh 'sudo docker run -itd -p 7000:8080 myimage:$BUILD_NUMBER'
 	      }
